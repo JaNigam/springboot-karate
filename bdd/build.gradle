@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.jayant'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    springBootVersion = '3.2.5' // ✅ Add Spring Boot version explicitly
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+dependencies {
+    implementation project(":") // Main app
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}" // ✅ Fix version
+    testImplementation 'com.intuit.karate:karate-junit5:1.4.1'
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+
+}
+
+test {
+    useJUnitPlatform()
+}
